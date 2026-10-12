@@ -1,0 +1,88 @@
+DRAFT DATASET AND METHODOLOGY SECTION
+Project: Empirical Research Investigation on Data Anonymization Techniques:
+Evaluating the Privacy-Utility Trade-off in ML Models
+
+STATUS NOTE
+The dataset selection note from Prathamesh is not available yet. Therefore, this draft deliberately does not name a final dataset, assert its schema, or report any experimental results. Replace the marked placeholders after the team confirms the dataset.
+
+1. DATASET DESCRIPTION
+
+The project will use a dataset selected by the team to investigate how data anonymization affects machine learning utility and privacy risk. The final dataset name, source, number of records, number of attributes, target variable, and data types must be added after Prathamesh confirms the selection.
+
+Dataset details to confirm:
+- Dataset name: [Pending team confirmation]
+- Source / URL: [Pending team confirmation]
+- Number of rows: [To be measured after loading the dataset]
+- Number of columns: [To be measured after loading the dataset]
+- Prediction target: [Pending team confirmation]
+- Candidate direct identifiers: [Identify from the actual schema]
+- Candidate quasi-identifiers: [Identify with the team]
+- Sensitive attributes, if applicable: [Identify with the team]
+- Missing values and data-quality issues: [To be checked during EDA]
+
+The team should use an approved dataset and avoid committing personal, confidential, or otherwise restricted data to a public repository. Any sample data used while the selection is pending should be clearly labeled synthetic and used only to test code structure.
+
+2. METHODOLOGY OVERVIEW
+
+The planned workflow consists of the following stages. The exact transformations and evaluation choices will be confirmed with the team before experiments are described as completed.
+
+Stage 1: Dataset inspection and preparation
+- Load the selected dataset using pandas.
+- Inspect column names, data types, missing values, duplicates, and basic distributions.
+- Identify the target variable and separate it from the input features.
+- Document preprocessing decisions so that the experiment can be reproduced.
+
+Stage 2: Baseline model
+- Train the agreed baseline machine learning model or models on the original prepared data.
+- Use a consistent train/test split and evaluation procedure for comparisons.
+- Record the model name, preprocessing steps, random seed where applicable, and evaluation metrics.
+- Obtain and verify baseline results with Prathamesh before adding numbers to the report.
+
+Stage 3: Anonymization
+- Apply the transformations agreed upon by the team to copies of the original data.
+- Potential Level 1 transformations discussed in the project plan include direct-identifier removal, age bucketing, and postal-code masking.
+- The Level 2 phase is planned to investigate generalization and suppression together with k-anonymity experiments, including k values selected by the team.
+- The final rules, quasi-identifiers, and privacy checks must be confirmed with Dhiraj and Sushant. Do not describe the prototype's simple masking as a formal privacy guarantee.
+
+Stage 4: Retraining
+- Apply the agreed preprocessing consistently to the anonymized dataset.
+- Retrain the selected model or models using the same evaluation protocol as the baseline.
+- Avoid data leakage by fitting preprocessing steps only on the training data where appropriate.
+- Log each experiment's configuration and results immediately.
+
+Stage 5: Comparison and reporting
+- Compare baseline metrics with the corresponding anonymized-data metrics.
+- Report absolute and relative changes only after calculating them from verified results.
+- Prepare tables and plots showing model utility across anonymization levels.
+- Discuss privacy limitations separately from predictive performance; accuracy alone does not measure re-identification risk.
+
+3. TOOLS AND TECHNOLOGIES
+
+- Python: implementation language for data processing and experiments.
+- pandas: loading, inspecting, transforming, and tabulating data.
+- scikit-learn: preprocessing, model training, and evaluation, depending on the final experiment.
+- Jupyter Notebook: interactive experiments, analysis, and reproducible result logging.
+- Matplotlib: planned visualizations of the privacy-utility trade-off.
+- GitHub: version control, collaboration, and storage of approved code and documentation.
+
+4. REPRODUCIBILITY AND TEAM COORDINATION
+
+Before the methodology is finalized:
+- Prathamesh: confirm dataset name, source, schema, target variable, baseline models, and verified metrics.
+- Sushant: confirm direct identifiers, quasi-identifiers, masking rules, and relevant privacy risks.
+- Dhiraj: confirm generalization/suppression logic and the planned k-anonymity experiments.
+- Kalpesh: maintain this documentation, record confirmed decisions, and prepare comparison tables and visualizations.
+
+Record the dataset version, preprocessing decisions, model settings, train/test split, and metrics for each run. Keep secrets and restricted data out of GitHub.
+
+5. CURRENT LIMITATIONS
+
+This section is a planning draft. The final dataset is not yet confirmed in the information available for this document. No model accuracy, privacy score, dataset size, or experimental conclusion is claimed here. Update this section once the team supplies the selection note and the experiments have been run.
+
+PENDING INPUTS
+[ ] Dataset name and source
+[ ] Dataset schema and prediction target
+[ ] Confirmed identifier and quasi-identifier columns
+[ ] Agreed Level 1 and Level 2 transformations
+[ ] Baseline model configuration and verified metrics
+[ ] Evaluation protocol and result log

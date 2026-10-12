@@ -1,11 +1,13 @@
-# Dataset files
-data/raw.csv
-data/cleaned/*.csv
-
 # Python
 __pycache__/
 *.py[cod]
 .venv/
+venv/
 
 # Jupyter
 .ipynb_checkpoints/
+
+# Dataset files: don't commit raw or generated CSV data
+data/raw.csv
+data/raw/*.csv
+data/cleaned/*.csv

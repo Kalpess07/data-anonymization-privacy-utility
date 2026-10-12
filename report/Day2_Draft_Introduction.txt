@@ -1,0 +1,41 @@
+DRAFT INTRODUCTION
+Project: Empirical Research Investigation on Data Anonymization Techniques:
+Evaluating the Privacy-Utility Trade-off in ML Models
+
+1. INTRODUCTION
+
+Data is widely used to understand patterns, improve services, support research, and build machine learning (ML) models. In areas such as healthcare, finance, and government, data analysis can help organizations make informed decisions. For example, healthcare data can support the study of disease trends, financial data can help identify patterns in transactions, and government data can help evaluate public services. However, these datasets may contain personal or sensitive information about individuals. Using or sharing such information without appropriate safeguards can create privacy risks. [REFERENCE NEEDED: sources on data use and privacy risks in these sectors]
+
+2. WHY INDIVIDUAL-LEVEL DATA IS VALUABLE
+
+Individual-level data contains records about particular people or entities, rather than only aggregated totals. It can preserve detailed patterns and relationships that may be important for statistical analysis and machine learning. Depending on the task, these details can help researchers identify trends, compare groups, and train models to make predictions. Aggregated data may be useful for summaries, but it can hide some variation between individual records. At the same time, detailed records can increase the risk that a person may be identified, especially when multiple attributes are combined or linked with external information. [REFERENCE NEEDED: sources on individual-level data utility and re-identification risk]
+
+3. PRIVACY CHALLENGE AND PROBLEM STATEMENT
+
+A key challenge is to reduce the risk of identifying individuals while retaining enough useful information for analysis. Data anonymization techniques attempt to reduce exposure of personal information by modifying, generalizing, masking, or removing selected attributes. However, stronger transformations can also remove useful patterns or reduce the quality of data available to a machine learning model. Conversely, retaining more detail may preserve model performance while leaving greater privacy risk.
+
+The problem addressed by this project is to investigate how different levels and techniques of data anonymization affect the usefulness of data for machine learning. The study will compare model performance on original data with performance on anonymized versions, while documenting the transformations applied and considering their privacy limitations. The exact dataset, selected attributes, anonymization rules, and evaluation metrics should be confirmed against the team's experimental setup.
+
+4. PROJECT OBJECTIVES
+
+The objectives of this project are:
+- To review data anonymization techniques relevant to the selected dataset.
+- To document the original dataset and identify direct identifiers, quasi-identifiers, and relevant sensitive attributes.
+- To compare the original data with versions transformed using agreed anonymization levels.
+- To evaluate and record machine learning performance using verified experimental results.
+- To present the privacy-utility trade-off through tables and visualizations.
+- To discuss the limitations of the tested techniques and avoid treating simple masking as a guarantee of anonymity.
+
+5. SCOPE
+
+The project focuses on an empirical comparison of data transformations and their effect on machine learning utility. Results should be based on reproducible experiments using the dataset and methodology agreed upon by the team. This draft does not claim that any particular anonymization level has achieved a specific privacy guarantee or accuracy result. Those conclusions can be written only after the relevant experiments and checks have been completed.
+
+REFERENCES TO ADD
+1. A reliable source on privacy risks and personal data use in healthcare, finance, and government.
+2. A research source on the analytical value of individual-level data.
+3. A foundational source on data anonymization, quasi-identifiers, and re-identification.
+4. A source explaining k-anonymity and its limitations.
+5. Sources specific to the final dataset and anonymization methods used by the team.
+
+DRAFT STATUS
+This is an initial introduction draft. Confirm the dataset, project terminology, scope, and methods with the team. Replace each reference-needed note with verified citations before submitting the report.

@@ -1,0 +1,42 @@
+REFERENCE LIST
+Project: Empirical Research Investigation on Data Anonymization Techniques:
+Evaluating the Privacy-Utility Trade-off in ML Models
+
+Purpose
+This document organizes foundational references for the team's literature review on k-anonymity, re-identification risk, and the Netflix Prize case. Verify access to each publication and check the final citation details before submitting the report.
+
+1. K-ANONYMITY AND PRIVACY MODELS
+
+Sweeney, L. (2002). k-Anonymity: A Model for Protecting Privacy.
+International Journal of Uncertainty, Fuzziness and Knowledge-Based Systems, 10(5), 557-570.
+DOI: https://doi.org/10.1142/S0218488502001648
+Relevance: Introduces k-anonymity as a privacy model based on making each record indistinguishable from at least k-1 other records with respect to selected quasi-identifiers.
+
+2. RE-IDENTIFICATION RISK
+
+Narayanan, A., & Shmatikov, V. (2008). Robust De-anonymization of Large Sparse Datasets.
+Proceedings of the 2008 IEEE Symposium on Security and Privacy, 111-125.
+DOI: https://doi.org/10.1109/SP.2008.33
+Relevance: Studies de-anonymization of sparse, high-dimensional data and demonstrates how auxiliary information can help link records across datasets.
+
+3. NETFLIX PRIZE RE-IDENTIFICATION CASE
+
+Narayanan, A., & Shmatikov, V. (2008). Robust De-anonymization of Large Sparse Datasets.
+Proceedings of the 2008 IEEE Symposium on Security and Privacy, 111-125.
+DOI: https://doi.org/10.1109/SP.2008.33
+Relevance: This paper examines the Netflix Prize dataset and shows how apparently anonymized movie-rating records could be linked with external information. It is directly relevant to the project's discussion of re-identification risk.
+
+4. PRIVACY AND DATA UTILITY
+
+Sweeney, L. (2002). k-Anonymity: A Model for Protecting Privacy.
+International Journal of Uncertainty, Fuzziness and Knowledge-Based Systems, 10(5), 557-570.
+DOI: https://doi.org/10.1142/S0218488502001648
+Relevance: Useful for explaining how generalization and suppression can reduce disclosure risk, while also motivating the need to consider the usefulness of transformed data.
+
+NOTES FOR THE TEAM
+- References 1 and 4 are the same publication and should appear only once in the final bibliography.
+- The Netflix Prize case is discussed in the Narayanan and Shmatikov paper listed above; do not list it as a separate publication unless you locate a separate source.
+- Add references for the final selected dataset, evaluation metrics, and any additional anonymization methods actually implemented.
+- Use one citation style consistently (for example, IEEE or APA).
+- Verify every reference and ensure the report cites it where relevant.
+- This is a starter reference list, not evidence that the sources have already been read or reviewed by a teammate.

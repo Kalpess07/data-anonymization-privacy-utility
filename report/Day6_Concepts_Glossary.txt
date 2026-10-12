@@ -1,0 +1,118 @@
+CONCEPTS AND GLOSSARY: DATA ANONYMIZATION
+Project: Empirical Research Investigation on Data Anonymization Techniques:
+Evaluating the Privacy-Utility Trade-off in ML Models
+
+DATASET BASIS
+This draft is adapted to the uploaded file adult_with_zip.csv. The file contains 32,561 rows and 16 columns:
+age, workclass, fnlwgt, education, education_num, marital_status, occupation, relationship, race, sex, capital_gain, capital_loss, hours_per_week, native_country, income, zip_code.
+
+The file includes the target-like field income and a zip_code column. Some categorical columns use '?' as a missing/unknown-value marker, including workclass, occupation, and native_country. Confirm with the team whether '?' should be treated as missing and how it should be handled in experiments.
+
+1. INTRODUCTION
+
+Data anonymization transforms selected attributes to reduce the risk of identifying individuals while retaining useful information for analysis. In this project, the uploaded adult_with_zip.csv dataset will be used to explore how selected transformations affect the data and, later, machine-learning utility. The specific quasi-identifiers and transformation rules must be agreed upon by the team.
+
+2. KEY CONCEPTS
+
+2.1 K-ANONYMITY
+K-anonymity is a privacy model in which each record is indistinguishable from at least k-1 other records with respect to a selected set of quasi-identifiers. In practice, every combination of quasi-identifier values should occur in at least k records.
+
+Dataset-related example:
+If the team selects age and zip_code as quasi-identifiers, it could generalize age into ranges and mask or generalize zip_code, then count how many records share each resulting combination. For k=3, each combination must appear in at least three records to satisfy 3-anonymity for those chosen quasi-identifiers.
+
+Important limitation:
+This check depends on the selected quasi-identifiers and threat model. K-anonymity does not eliminate all privacy risks, and a group may still reveal a sensitive attribute if its members share the same value.
+
+2.2 GENERALIZATION
+Generalization replaces a detailed value with a broader category.
+
+Example using age:
+- Original age: 39
+- Generalized age band: 30-39
+
+The exact age bands should be selected consistently and documented. Generalization reduces detail and may affect analysis utility.
+
+2.3 MASKING
+Masking replaces part of a value with a symbol or less specific representation.
+
+Example using zip_code:
+- Original zip_code: 93810
+- Masked example: 93***
+
+This is an illustrative rule only. The team should confirm how many digits to retain and whether zip_code is an appropriate quasi-identifier for the study. Masking alone does not prove anonymity.
+
+2.4 SUPPRESSION
+Suppression hides or removes a selected value or record according to a defined rule.
+
+Example using zip_code:
+- Original zip_code: 93810
+- Suppressed example: [SUPPRESSED]
+
+The team should specify when suppression is applied, such as to selected values or records that do not meet a chosen privacy criterion. Suppression can reduce disclosure risk but may also remove useful information.
+
+2.5 DIRECT IDENTIFIERS AND QUASI-IDENTIFIERS
+A direct identifier directly identifies a person, such as a full name or a unique identification number. The inspected dataset does not contain an obvious name column. This does not mean the dataset is automatically anonymous.
+
+Quasi-identifiers are attributes that may contribute to identification when combined with other information. Candidate fields for team review may include age, zip_code, sex, marital_status, relationship, workclass, and native_country. These are candidates for discussion, not a final classification.
+
+3. EXAMPLE BEFORE/AFTER TABLE
+
+The following transformations are illustrative and have not been applied to the entire dataset.
+
+| Dataset field | Example original value | Example transformed value | Technique |
+|---|---|---|---|
+| age | 39 | 30-39 | Generalization |
+| zip_code | 93810 | 93*** | Masking |
+| zip_code | 93810 | [SUPPRESSED] | Suppression |
+| name | Not present in the inspected columns | Not applicable | No name column to remove |
+
+4. SHORT GLOSSARY
+
+Anonymization:
+Transforming data to reduce the risk of identifying individuals. The protection achieved depends on the method and context.
+
+Direct identifier:
+A field that directly identifies a person, such as a name or unique ID.
+
+Quasi-identifier:
+A field that may help identify a person when combined with other fields or external information.
+
+Sensitive attribute:
+An attribute whose disclosure may reveal private information. The team should define which attributes are sensitive for this study.
+
+Generalization:
+Replacing a detailed value with a broader range or category.
+
+Masking:
+Concealing part of a value while leaving some characters visible.
+
+Suppression:
+Hiding or removing selected values or records under a defined rule.
+
+K-anonymity:
+A property in which each combination of selected quasi-identifier values is shared by at least k records.
+
+Re-identification:
+Linking records believed to be anonymous to an individual, often using external information.
+
+Privacy-utility trade-off:
+The balance between reducing privacy risk and retaining information useful for analysis or model performance.
+
+Equivalence class:
+A group of records sharing the same values for the selected quasi-identifiers after transformation.
+
+5. DATA QUALITY NOTE
+
+The uploaded file has 32,561 rows and 16 columns. During inspection, '?' appears as a marker in workclass, occupation, and native_country. Before experiments, confirm whether these values represent missing or unknown data and document the chosen handling method. Do not silently treat '?' as an ordinary category without checking.
+
+6. QUESTIONS FOR TECHNICAL REVIEW
+
+Ask Sushant and Dhiraj to confirm:
+- Which columns should be treated as quasi-identifiers for the agreed threat model.
+- Whether age and zip_code should be generalized, masked, or suppressed, and the exact rules.
+- Which value or condition should trigger suppression.
+- The k values and validation method planned for the k-anonymity experiments.
+- How '?' values in categorical fields should be handled.
+
+DRAFT STATUS
+This is a dataset-aware conceptual draft based on the uploaded file's column names and structure. The example transformations are illustrative only. The team must confirm the quasi-identifiers, rules, and privacy checks before treating them as final methodology.
