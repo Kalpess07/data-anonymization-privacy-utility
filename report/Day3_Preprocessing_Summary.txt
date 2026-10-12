@@ -1,0 +1,17 @@
+# Day 3: Preprocessing Pipeline
+
+- Dataset: Adult Census Income (cleaned)
+- Target: income
+- Random seed: 42
+- Train/test split: 80/20
+- Stratification: income
+- Numeric features: ['age', 'fnlwgt', 'education_num', 'capital_gain', 'capital_loss', 'hours_per_week']
+- Categorical features: ['workclass', 'education', 'marital_status', 'occupation', 'relationship', 'race', 'sex', 'native_country', 'zip_code']
+- Training rows: 26048
+- Testing rows: 6513
+- Processed training shape: (26048, 22716)
+- Processed testing shape: (6513, 22716)
+
+Preprocessing was fitted on training data only.
+The test set was transformed using the fitted pipeline.
+ZIP-code provenance must be documented separately.
