@@ -1,0 +1,16 @@
+original_feature,importance,planned_for_anonymization
+zip_code,0.3645123731379296,True
+marital_status,0.08027644093242725,True
+age,0.06986504307504494,True
+relationship,0.06641190347183394,False
+capital_gain,0.06215263318085924,False
+occupation,0.061818021285399816,True
+education,0.06180231115263077,True
+fnlwgt,0.05470841807915046,False
+hours_per_week,0.044508146012720455,False
+education_num,0.03778208156970852,False
+workclass,0.02790615230989757,False
+sex,0.023310598641441006,True
+capital_loss,0.0193840199507402,False
+native_country,0.015037369730879083,True
+race,0.010524487469337113,True
