@@ -1,0 +1,2 @@
+experiment,day,model,accuracy,precision,recall,f1_score
+Level 1,11,Random Forest,0.8615077537233226,0.7609717868338558,0.6192602040816326,0.6828410689170182
