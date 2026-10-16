@@ -1,0 +1,3 @@
+target_k,achieved_min_k,number_of_equivalence_classes,total_rows,records_in_violating_classes,violating_records_percentage,criterion_achieved,quasi_identifiers,dataset_version,input_path
+3,1,5647,32561,2170,6.66,False,"age,zip_code",cleaned_level1,data\cleaned\adult_cleaned.csv
+5,1,5647,32561,5548,17.04,False,"age,zip_code",cleaned_level1,data\cleaned\adult_cleaned.csv
