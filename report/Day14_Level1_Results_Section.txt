@@ -1,0 +1,45 @@
+DAY 14: LEVEL 1 RESULTS SECTION
+
+Project: An Empirical Research Investigation on Data Anonymization Techniques: Evaluating the Privacy-Utility Trade-off in ML Models
+
+1. Results Overview
+
+This section compares baseline model performance with performance after Level 1 anonymization. The supplied results_log.csv contains baseline results only. The supplied baseline_vs_level1_comparison.csv contains both baseline and Level 1 metrics. The baseline values in the comparison file match the baseline values in the results log to the precision recorded in those files.
+
+2. Baseline Versus Level 1 Results
+
+Metrics are shown as percentages. The change column is Level 1 minus baseline, expressed in percentage points (pp).
+
+| Model | Metric | Baseline | Level 1 | Change (pp) |
+|---|---|---:|---:|---:|
+| Logistic Regression | Accuracy | 85.51% | 85.55% | +0.046 |
+| Logistic Regression | Precision | 74.04% | 73.03% | -1.002 |
+| Logistic Regression | Recall | 61.29% | 63.39% | +2.105 |
+| Logistic Regression | F1-score | 67.06% | 67.87% | +0.811 |
+| Random Forest | Accuracy | 86.07% | 86.15% | +0.077 |
+| Random Forest | Precision | 77.07% | 76.10% | -0.971 |
+| Random Forest | Recall | 60.01% | 61.93% | +1.913 |
+| Random Forest | F1-score | 67.48% | 68.28% | +0.805 |
+
+3. Interpretation
+
+After Level 1 anonymization, accuracy increased slightly for both models. Logistic Regression accuracy rose from 85.51% to 85.55%, a change of approximately +0.046 percentage points. Random Forest accuracy rose from 86.07% to 86.15%, a change of approximately +0.077 percentage points.
+
+Recall and F1-score also increased for both models, while precision decreased. For Logistic Regression, recall increased from 61.29% to 63.39%, while precision decreased from 74.04% to 73.03%. For Random Forest, recall increased from 60.01% to 61.93%, while precision decreased from 77.07% to 76.10%.
+
+These results suggest a small shift in the precision-recall balance after Level 1 transformation. They do not establish that anonymization generally improves model performance. The observed effect applies to these models, this dataset, and the evaluation setup recorded in the supplied files.
+
+4. Privacy-Utility Discussion
+
+Accuracy is one measure of model utility, but it does not directly measure privacy protection. The small accuracy increases should therefore not be interpreted as evidence that the anonymized dataset is safe from re-identification. Privacy claims require separate analysis of the selected quasi-identifiers, equivalence classes, k-anonymity or other privacy measures, and the assumed threat model.
+
+5. Data Source and Verification Notes
+
+- The uploaded results_log.csv contains baseline results only; it does not contain Level 1 rows.
+- The uploaded baseline_vs_level1_comparison.csv contains the baseline and Level 1 comparison.
+- Baseline values in the comparison file match the separate baseline log.
+- Before final submission, confirm that the baseline and Level 1 experiments used comparable train/test splits, preprocessing, model settings, and evaluation metrics.
+- The supplied files alone do not establish whether the experiments were independently rerun or whether privacy metrics were calculated.
+
+Suggested repository path: report/day14_level1_results_section.txt
+Suggested commit message: docs: add Level 1 results section
