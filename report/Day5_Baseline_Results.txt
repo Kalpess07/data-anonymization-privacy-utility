@@ -1,0 +1,54 @@
+DAY 5: BASELINE MODEL RESULTS
+Project: Empirical Research Investigation on Data Anonymization Techniques: Evaluating the Privacy-Utility Trade-off in ML Models
+
+Purpose
+This document records the original machine-learning model performance before applying anonymization. These baseline results will be used as the reference point for comparing model utility after anonymization.
+
+1. Dataset and Experimental Setup
+- Dataset: Adult Census Income dataset with a zip_code column.
+- Target variable: income.
+- Models evaluated: Logistic Regression and Random Forest.
+- Train/test split: 80% training and 20% testing.
+- Random state: 42.
+- Stratification: Based on the income target.
+- Evaluation metrics: Accuracy, precision, recall, and F1-score.
+- Numeric preprocessing: Median imputation and standard scaling.
+- Categorical preprocessing: Most-frequent imputation and one-hot encoding.
+
+Note: These details are transcribed from the supplied baseline notebook and should be checked against the executed notebook before final submission.
+
+2. Baseline Results
+Model,Accuracy,Precision,Recall,F1-score
+Logistic Regression,85.51%,74.04%,61.29%,67.06%
+Random Forest,86.07%,77.07%,60.01%,67.48%
+
+3. Interpretation
+The baseline experiments evaluated Logistic Regression and Random Forest using accuracy, precision, recall, and F1-score. Logistic Regression achieved an accuracy of 85.51% and an F1-score of 67.06%. Random Forest achieved an accuracy of 86.07% and an F1-score of 67.48%.
+
+Random Forest performed slightly better in terms of accuracy, precision, and F1-score, while Logistic Regression achieved slightly higher recall. These results establish the baseline against which models trained on anonymized data can be compared.
+
+4. Comparison with Level 1 Anonymization
+The repository's baseline_vs_level1_comparison.csv reports the following accuracy values:
+Model,Baseline accuracy,Level 1 accuracy,Accuracy change
+Logistic Regression,85.51%,85.55%,+0.046 percentage points
+Random Forest,86.07%,86.15%,+0.077 percentage points
+
+These changes are small. They do not, by themselves, prove that anonymization improves model performance. Confirm that both experiments use equivalent evaluation conditions before drawing conclusions. Refer to the comparison CSV and notebook for the full metrics.
+
+5. Limitations and Verification Notes
+- This document summarizes existing repository outputs; it does not claim that the author personally trained the models.
+- Confirm all figures against the committed CSV files and executed notebook outputs before final submission.
+- Baseline and anonymized experiments must use consistent splits, target definitions, preprocessing, and metrics for a fair comparison.
+- Do not interpret a small performance change as causal evidence that anonymization improves utility.
+
+6. Evidence Files
+- notebooks/03_preprocessing.ipynb
+- notebooks/04_baseline_models.ipynb
+- notebooks/12_baseline_vs_level1.ipynb
+- notebooks/13_final_experiment_summary.ipynb
+- results/baseline_metrics.csv
+- results/baseline_vs_level1_comparison.csv
+- results/final_experiment_summary.csv
+
+Suggested GitHub commit message:
+docs: add baseline results report
