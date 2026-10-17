@@ -67,3 +67,37 @@ Document any required dataset files that are not committed to GitHub.
 Anonymization techniques can reduce some disclosure risks but do not guarantee that re-identification is impossible. The privacy implications depend on the data, transformation rules, available auxiliary information, and threat model. Report the chosen quasi-identifiers and assumptions explicitly.
 10. Contributions
 Please see CONTRIBUTING.md for repository contribution and collaboration guidelines.
+
+## 11. Reproducing the Level 1 Encoding Notebook
+
+The notebook `notebooks/08_level1_encoding.ipynb` applies the project's Level 1 transformations to the cleaned Adult dataset. Before running it, confirm that the repository has this local input file:
+
+```text
+data/cleaned/adult_cleaned.csv
+```
+
+The dataset may be excluded from GitHub, so obtain it from the project's documented dataset source and run the project's data-cleaning workflow first if the cleaned file is not available. Do not substitute a different dataset without recording that change.
+
+From the repository root, create and activate your Python environment, then install the dependencies:
+
+```bash
+python -m pip install -r requirements.txt
+jupyter notebook
+```
+
+In Jupyter, open `notebooks/08_level1_encoding.ipynb` and run its cells from top to bottom:
+
+1. **Load the cleaned dataset:** reads `data/cleaned/adult_cleaned.csv`, treating `zip_code` as text so leading zeros are preserved.
+2. **Test the transformation functions:** imports `generalize_age`, `mask_zip_code`, and `prepare_level1_features` from `src/level1_encoding.py` and applies the feature-preparation function to a small example.
+3. **Apply Level 1 encoding:** transforms the full dataframe and displays the first ten rows of the `age` and `zip_code` fields.
+
+The notebook is a transformation demonstration. It does not, by itself, retrain models or produce a complete privacy-utility comparison. Use the separate model-evaluation and baseline-versus-Level 1 comparison notebooks for those analyses, and confirm their required input CSV files and settings before running them.
+
+### Troubleshooting
+
+- **`FileNotFoundError`:** check that `data/cleaned/adult_cleaned.csv` exists and that Jupyter was launched from the repository root or the `notebooks/` directory.
+- **`ModuleNotFoundError: src...`:** check that `src/level1_encoding.py` exists and that you opened the notebook from the repository's `notebooks/` folder or root.
+- **Missing package:** activate the same Python environment used by Jupyter and run `python -m pip install -r requirements.txt` again.
+- **Different results:** record the dataset version, preprocessing steps, split settings, random seeds, and model configuration before comparing metrics.
+
+Do not describe results as reproduced until the notebook has been run successfully and its outputs have been checked.
