@@ -1,0 +1,80 @@
+DAY 18: LEVEL 2 ANONYMIZATION METHODOLOGY
+
+Project: An Empirical Research Investigation on Data Anonymization Techniques: Evaluating the Privacy-Utility Trade-off in ML Models
+
+1. Purpose
+
+Level 2 is intended to apply stronger generalization and a k-anonymity suppression threshold than the project's low anonymization setting. According to the current pipeline configuration, the medium setting uses an age-bin width of 10, keeps one ZIP-like digit before masking, and sets target k = 3. The high setting uses an age-bin width of 20, keeps one ZIP-like digit before masking, and sets target k = 5. These are proposed configuration defaults in the code and should be confirmed with the team before being reported as final experimental settings.
+
+2. Transformations in the Current Pipeline
+
+The pipeline copies the input DataFrame, applies any configured column removals, generalizes the age column when present, and masks the zip_code column when present. The configured column-removal lists are empty for low, medium, and high in the supplied pipeline, so the current configuration does not remove a name or other direct identifier by default.
+
+| Setting | Age generalization width | ZIP-like digits retained | Target k |
+|---|---:|---:|---:|
+| Low | 10 years | 2 | None |
+| Medium | 10 years | 1 | 3 |
+| High | 20 years | 1 | 5 |
+
+The exact displayed values depend on the implementation of the generalization and masking functions. The table above records the current configuration values, not measured privacy results.
+
+3. Generalization
+
+Generalization replaces a precise value with a broader category. The current configuration uses ten-year age bins for the medium setting and twenty-year age bins for the high setting. Broader age ranges can make more records share the same age value, but they also reduce age detail for analysis.
+
+The pipeline also masks the zip_code column. Medium and high both retain one leading digit according to the current configuration. For a five-digit input such as 93810, a one-digit retention rule would typically display 9**** if the masking function replaces the remaining four characters. Confirm the exact output against src/anonymization.py before using a concrete ZIP-like example in the final report.
+
+4. K-Anonymity and Suppression
+
+The pipeline measures equivalence-class sizes for the supplied quasi-identifiers before suppression. When a target k is configured, it removes records that belong to equivalence classes smaller than that threshold. Under the current defaults, medium uses k = 3 and high uses k = 5.
+
+The k-anonymity helper groups records by the selected quasi-identifiers and counts each group. It then retains records whose group size is at least k and reports the input row count, output row count, number and fraction of suppressed rows, and the minimum class size after suppression.
+
+Suppression removes whole records from the modeling dataset; it does not simply replace an individual cell with a blank value. If models are trained after suppression, the report should document the number of records remaining and confirm whether the same train/test evaluation procedure was used for baseline and anonymized experiments.
+
+5. Illustrative Before/After Table
+
+The table below is illustrative only. It shows the intent of broader generalization and masking, not actual output verified by running the pipeline. The precise ZIP-like output must be checked against the mask_zip implementation.
+
+| Attribute | Example input | Illustrative Level 2 output | Technique | Note |
+|---|---|---|---|---|
+| age | 23 | 20-39 | Broader age generalization | Illustrative high-setting range; verify bin boundaries |
+| age | 37 | 20-39 | Broader age generalization | Illustrative high-setting range; verify bin boundaries |
+| zip_code | 93810 | 9**** | Retain one leading digit | Confirm exact mask format in code |
+| Record with a quasi-identifier class smaller than k=3 | A record in a class of size 2 | Record suppressed | Suppression | Applied only when medium configuration is used with quasi-identifiers |
+| Record with a quasi-identifier class smaller than k=5 | A record in a class of size 4 | Record suppressed | Suppression | Applied only when high configuration is used with quasi-identifiers |
+
+The pipeline only performs k-anonymity measurement and suppression when a non-empty list of quasi-identifiers is passed to apply_anonymization. If no quasi-identifiers are supplied, the target k values in the configuration do not trigger suppression.
+
+6. Handling Suppressed Records in Modeling
+
+Suppressed records are absent from the output dataset returned by the pipeline. They should not be treated as rows with missing feature values. Before retraining models, the team should record:
+- The number of input records.
+- The number of records remaining after suppression.
+- The target k and quasi-identifiers used.
+- Whether suppression was applied before the train/test split or separately within a defined evaluation procedure.
+- The model metrics and evaluation conditions used for the resulting dataset.
+
+Comparisons can be misleading if the baseline and anonymized models are evaluated on different test populations. The report should clearly document the evaluation design and its limitations.
+
+7. Limitations
+
+- Stronger generalization can reduce the usefulness of age and ZIP-like attributes.
+- Suppression can reduce sample size and may introduce selection bias.
+- k-anonymity depends on the selected quasi-identifiers and does not guarantee protection against every form of re-identification or sensitive-attribute inference.
+- The supplied pipeline comments describe these defaults as proposed; team confirmation is needed before treating them as final.
+- The current configuration has empty remove_columns lists, so direct identifier removal is not configured by these defaults.
+- The code and configuration alone do not establish the actual number of records suppressed or the achieved k values for the project dataset.
+
+8. Review Checklist
+
+- Confirm the medium/high settings with Dhiraj and the team.
+- Verify exact age-bin boundaries and ZIP masking output in the implementation.
+- Confirm the quasi-identifiers passed to apply_anonymization.
+- Run the pipeline on the intended cleaned dataset and save the suppression summary.
+- Record rows before and after suppression and measure achieved minimum k.
+- Confirm the modeling/evaluation procedure for suppressed records.
+- Ask Dhiraj to review this section for technical accuracy.
+
+Suggested repository path: report/level2_methodology_section.txt
+Suggested commit message: docs: add Level 2 methodology section
