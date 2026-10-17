@@ -1,0 +1,70 @@
+DAY 12: LEVEL 1 ANONYMIZATION REPORT SECTION
+
+Project: An Empirical Research Investigation on Data Anonymization Techniques: Evaluating the Privacy-Utility Trade-off in ML Models
+
+1. Level 1 Anonymization Methodology
+
+Level 1 applies basic transformations intended to reduce the precision of selected attributes while retaining useful information for analysis. The project’s Level 1 examples describe age generalization into ten-year ranges and masking the final two characters of valid five-digit ZIP-like values. The before/after examples below are illustrative and should be checked against executed notebook output before being described as verified row-level results.
+
+2. Direct Identifier Removal
+
+Direct identifiers, such as a person's name, should be removed before releasing an anonymized dataset when such fields are present and are not required for analysis. However, the listed columns for the Adult dataset do not show an obvious name field. The available evidence therefore does not establish that a name column was removed in this specific dataset. State name removal as a general policy unless the team confirms that a name-like field existed and was removed.
+
+3. Age Bucketing (Generalization)
+
+Valid age values are mapped to ten-year intervals. This reduces exact age precision while retaining approximate age-group information. Examples:
+- 23 becomes 20-29
+- 37 becomes 30-39
+- 61 becomes 60-69
+
+The exact boundary and missing-value behavior should follow the implementation in src/level1_encoding.py.
+
+4. ZIP-Code Masking
+
+For valid five-digit values, the Level 1 example rule retains the first three characters and masks the final two characters:
+- 93810 becomes 938**
+- 24592 becomes 245**
+
+The source table describes missing values as remaining missing, but the code's behavior for invalid or missing values should be confirmed against executed output. Masking reduces visible detail; it does not by itself establish that a value cannot be linked to other information.
+
+5. Before/After Examples
+
+| Column | Original value | Level 1 value | Technique |
+|---|---|---|---|
+| age | 23 | 20-29 | Age generalization into 10-year bins |
+| age | 37 | 30-39 | Age generalization into 10-year bins |
+| age | 61 | 60-69 | Age generalization into 10-year bins |
+| zip_code | 93810 | 938** | Mask final two characters |
+| zip_code | 24592 | 245** | Mask final two characters |
+| zip_code | Missing | Missing* | Missing-value handling; verify against code |
+
+*The missing-value example is provisional. Confirm whether the implementation preserves missing values or converts invalid values to missing before final submission.
+
+6. Baseline Versus Level 1 Model Performance
+
+Values below are transcribed from the supplied baseline_vs_level1_comparison.csv. Changes are Level 1 minus baseline, in percentage points. The comparison file's recorded values are shown as percentages; verify that baseline and Level 1 use equivalent data splits, preprocessing, and evaluation procedures.
+
+| Model | Baseline accuracy | Level 1 accuracy | Change (pp) | Baseline precision | Level 1 precision | Change (pp) | Baseline recall | Level 1 recall | Change (pp) | Baseline F1 | Level 1 F1 | Change (pp) |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| Logistic Regression | 85.51% | 85.55% | +0.046 | 74.04% | 73.87% | -0.172 | 61.29% | 61.40% | +0.110 | 67.06% | 67.07% | +0.011 |
+| Random Forest | 86.07% | 86.15% | +0.077 | 77.07% | 76.92% | -0.151 | 60.01% | 60.20% | +0.189 | 67.48% | 67.52% | +0.036 |
+
+Interpretation: In the supplied comparison, accuracy increases slightly for both models after Level 1 transformation. Recall and F1 also increase slightly, while precision decreases. These are small observed differences and do not prove that anonymization improves model performance or guarantees privacy. Results depend on the dataset, model settings, preprocessing, and evaluation split.
+
+7. Privacy Considerations and Limitations
+
+Age generalization and ZIP masking reduce the precision of individual attributes but do not automatically guarantee k-anonymity or prevent re-identification. Risk depends on the combination of quasi-identifiers, the distribution of records, external information available to an attacker, and the threat model. Name the quasi-identifiers used in the privacy evaluation and include measured k-anonymity or suppression results only when those metrics have actually been calculated.
+
+8. Verification Before Final Submission
+
+- Run notebooks/08_level1_encoding.ipynb from top to bottom in the documented environment.
+- Confirm the required input file path and that the dataset is available locally.
+- Check every before/after example against the executed transformation output.
+- Confirm with the team whether any direct identifier field was present and removed.
+- Verify that baseline and Level 1 metrics use equivalent train/test splits, preprocessing, and evaluation settings.
+- Add measured privacy metrics only after running the relevant privacy-evaluation code.
+
+Suggested report placement: Section 6 (Methodology), followed by the performance comparison in the Results section. Adjust section numbering to match the final report structure.
+
+Suggested repository path: report/day12_level1_anonymization_report_section.txt
+Suggested commit message: docs: add Level 1 anonymization report section
