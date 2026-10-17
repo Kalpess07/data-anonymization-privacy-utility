@@ -1,0 +1,40 @@
+DAY 10: LEVEL 1 ANONYMIZATION BEFORE/AFTER TABLE
+Project: Empirical Research Investigation on Data Anonymization Techniques: Evaluating the Privacy-Utility Trade-off in ML Models
+
+Purpose
+This document records representative Level 1 transformations used in the project. The examples below reflect the transformation rules described for the Level 1 encoding code. Before final submission, verify them against the notebook's executed output and Sushant's sample.
+
+1. Before/After Examples
+
+| Column | Original value | Anonymized value | Technique | Level |
+|---|---|---|---|---|
+| age | 23 | 20-29 | Age generalization into 10-year bins | Level 1 |
+| age | 37 | 30-39 | Age generalization into 10-year bins | Level 1 |
+| age | 61 | 60-69 | Age generalization into 10-year bins | Level 1 |
+| zip_code | 93810 | 938** | Mask final two characters | Level 1 |
+| zip_code | 24592 | 245** | Mask final two characters | Level 1 |
+| zip_code | Missing | Missing | Missing value preserved | Level 1 |
+
+Note: These are representative examples of the stated rules. Confirm that each example appears in the actual transformation output before treating the table as a verified record-level result. Do not expose unnecessary sensitive row-level data in a public report.
+
+2. Transformation Summary
+
+- age: generalize valid ages into 10-year ranges, such as 20-29 or 30-39.
+- zip_code: mask the final two characters of valid five-digit values, such as 93810 becoming 938**.
+- Missing or invalid values: preserve or convert to missing according to the implemented function's behavior. Confirm the exact behavior against the code and output.
+
+3. Interpretation
+
+Generalization reduces the precision of age values, while masking hides part of the ZIP-like value. These transformations reduce detail but do not, by themselves, prove that the dataset satisfies k-anonymity or guarantee protection against re-identification.
+
+4. Verification Checklist
+
+- [ ] Run notebooks/08_level1_encoding.ipynb from top to bottom.
+- [ ] Confirm the input dataset path is correct.
+- [ ] Verify the examples against the executed output.
+- [ ] Ask Sushant to confirm the sample and transformation rules.
+- [ ] Ensure the README describes only transformations actually implemented.
+- [ ] Keep this document consistent with the actual code.
+
+Suggested repository path: report/day10_level1_before_after_table.txt
+Suggested commit message: docs: add Level 1 before-after examples
