@@ -1,0 +1,78 @@
+DAY 13: STREAMLIT FEASIBILITY NOTES
+
+Project: An Empirical Research Investigation on Data Anonymization Techniques: Evaluating the Privacy-Utility Trade-off in ML Models
+
+1. Purpose
+
+These notes assess the feasibility of building a small Streamlit application that allows a user to upload a CSV file, choose columns for anonymization, preview the transformed data, and download the resulting CSV. This is a preliminary feasibility note, not evidence that the application has already been implemented or tested.
+
+2. Existing Project Dependencies
+
+The project's requirements list includes:
+- pandas
+- numpy
+- scikit-learn
+- matplotlib
+- seaborn
+- jupyter
+- streamlit
+- openpyxl
+
+Streamlit is already listed, so the requirements appear to include the main framework needed for a basic app. Pandas can read and transform tabular data and serialize a DataFrame to CSV. The dependency list alone does not prove that the environment is installed correctly or that an app currently exists.
+
+3. Proposed User Workflow
+
+1. Open the Streamlit app.
+2. Upload a CSV file using a file-upload control.
+3. Preview a limited number of rows and inspect available column names.
+4. Select the columns that should be transformed.
+5. Choose a supported transformation, such as age bucketing or masking the final characters of a ZIP-like field, where appropriate.
+6. Preview the anonymized output and compare selected original and transformed values.
+7. Download the transformed dataset as a CSV file.
+
+4. Feasibility Assessment
+
+| Feature | Feasibility | Notes |
+|---|---|---|
+| CSV upload | High | A standard Streamlit file uploader can accept CSV files. |
+| Column selection | High | Column names can be presented as selectable options after loading the CSV. |
+| Age bucketing | High | Feasible when the user identifies the correct age column and the intended bucket width is defined. |
+| ZIP-like value masking | High | Feasible when the column format and masking rule are explicit; do not assume every identifier is a real ZIP code. |
+| Preview transformed data | High | A sample of rows can be shown before download. |
+| CSV download | High | The transformed table can be encoded as CSV and offered through a download control. |
+| K-anonymity measurement | Medium | Requires explicit quasi-identifier selection, equivalence-class calculation, and careful handling of suppression rules. |
+| Privacy guarantee | Not established | A simple UI and masking rules do not by themselves prove anonymity or prevent re-identification. |
+
+5. Basic Implementation Requirements
+
+- Validate that the uploaded file is a readable CSV and handle empty or malformed files with a clear message.
+- Let users select columns explicitly instead of applying transformations to every column automatically.
+- Preserve the original upload in memory and create a separate transformed copy.
+- Define how missing and invalid values are handled for each transformation.
+- Show a preview and identify which transformations were applied.
+- Offer the output as a downloadable CSV file.
+- Avoid logging or exposing uploaded data unnecessarily; do not claim the app is secure or production-ready without testing.
+- Keep transformations modular so the app can reuse the project's existing anonymization functions when their behavior and imports are verified.
+
+6. Risks and Limitations
+
+- Column names and data formats vary between datasets, so transformations should be configurable and validated.
+- Masking and generalization reduce detail but may leave combinations of quasi-identifiers that enable re-identification.
+- The app should not label an output "anonymous" solely because selected columns were masked.
+- Large CSV files may use substantial memory and need file-size limits or additional handling.
+- The listed dependencies do not confirm that the application has been run, tested, or deployed.
+
+7. Conclusion
+
+A basic Streamlit CSV anonymization tool is feasible within the current project dependency list because Streamlit and pandas are included. The proposed minimum viable version can support upload, column selection, configurable Level 1 transformations, preview, and download. The team should validate the existing transformation functions, test missing and invalid values, and avoid making formal privacy guarantees without measured evaluation.
+
+8. Suggested Next Steps
+
+1. Confirm whether an app.py or equivalent Streamlit file already exists.
+2. Reuse and test the existing Level 1 transformation functions rather than duplicating their logic.
+3. Build a minimal upload-transform-preview-download flow.
+4. Test with a small CSV containing valid, missing, and invalid values.
+5. Document the tested behavior and known limitations.
+
+Suggested repository path: report/streamlit_feasibility_notes.txt
+Suggested commit message: docs: add Streamlit feasibility notes
