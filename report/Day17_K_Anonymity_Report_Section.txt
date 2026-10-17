@@ -1,0 +1,75 @@
+DAY 17: K-ANONYMITY SECTION OF THE REPORT
+
+Project: An Empirical Research Investigation on Data Anonymization Techniques: Evaluating the Privacy-Utility Trade-off in ML Models
+
+1. Introduction to K-Anonymity
+
+K-anonymity is a privacy model intended to reduce the likelihood that a person can be singled out from a released dataset using a selected set of quasi-identifiers. A dataset satisfies k-anonymity with respect to the chosen quasi-identifiers when every record has at least k-1 other records that share the same quasi-identifier values. In other words, each equivalence class contains at least k records.
+
+The privacy interpretation depends on which attributes are selected as quasi-identifiers and on the assumptions made about information an outside party might possess. K-anonymity is not a universal guarantee that a record cannot be re-identified.
+
+2. Quasi-Identifiers and Equivalence Classes
+
+A quasi-identifier is an attribute, or combination of attributes, that may help distinguish a person when linked with external information. Depending on the dataset and threat model, examples can include age, ZIP-like code, sex, or marital status.
+
+An equivalence class is a group of records that have identical values for the selected quasi-identifiers after the chosen transformations have been applied.
+
+For example, if the selected quasi-identifiers are age_group and zip_prefix, records with age_group = "20-29" and zip_prefix = "938**" belong to the same equivalence class when both values match exactly.
+
+3. Simple K-Anonymity Example
+
+Suppose a dataset contains the following transformed records. The example is illustrative and is not a measured result from the project dataset.
+
+| Record | Age group | ZIP-like value |
+|---|---|---|
+| A | 20-29 | 938** |
+| B | 20-29 | 938** |
+| C | 20-29 | 938** |
+| D | 30-39 | 245** |
+| E | 30-39 | 245** |
+
+If age group and ZIP-like value are the selected quasi-identifiers, the first three records form an equivalence class of size 3, and the last two records form an equivalence class of size 2. The smallest class has two records, so this example satisfies 2-anonymity for the selected quasi-identifiers. It does not satisfy 3-anonymity because the second class contains only two records.
+
+This example demonstrates why k-anonymity is determined by the size of the smallest equivalence class, not by the average class size.
+
+4. Generalization
+
+Generalization replaces specific values with broader categories so that more records share the same quasi-identifier values. For example, an exact age of 23 may be generalized to the age range 20-29. A five-digit ZIP-like value may be represented using a prefix and masked characters, such as 93810 becoming 938**.
+
+Generalization can increase equivalence-class sizes, but it also reduces detail that may be useful for analysis. The appropriate level of generalization depends on the dataset, the intended analysis, and the privacy requirements.
+
+5. Suppression
+
+Suppression removes or hides selected values or records that do not meet the chosen privacy criterion. For example, a record that remains in a very small equivalence class may be suppressed if the project’s policy requires every released class to contain at least k records.
+
+Suppression can improve compliance with a selected k-anonymity threshold, but it may remove useful information or introduce bias if the suppressed records differ systematically from the rest of the dataset. The suppression rule and the number of affected records should be documented.
+
+6. Limitations of K-Anonymity
+
+- Dependence on quasi-identifiers: results change according to which attributes are selected.
+- Information loss: generalization and suppression may reduce analytical detail or remove records.
+- Homogeneity risk: records in the same equivalence class may share the same sensitive attribute, so class membership may still reveal information.
+- Background-knowledge risk: an attacker may use outside information to infer sensitive details even when records are not uniquely distinguishable.
+- No universal guarantee: satisfying k-anonymity does not prove that re-identification or sensitive-attribute inference is impossible.
+- Data and context dependence: privacy risk depends on the released data, auxiliary information, and the assumed threat model.
+
+K-anonymity should therefore be reported alongside a clear description of quasi-identifiers, transformation rules, suppression policy, and the limits of the evaluation.
+
+7. Application to This Project
+
+The project investigates transformations such as age generalization and ZIP-like value masking and includes code intended to measure k-anonymity and suppress records below a selected threshold. For a final empirical claim, the team should record:
+- The exact quasi-identifiers used in the calculation.
+- The dataset version and preprocessing steps.
+- The measured k value before and after transformation.
+- The selected target k, if one was used.
+- The number of records suppressed and the suppression rule.
+- Any implementation warnings or limitations.
+
+Do not state that the project dataset satisfies a particular k-anonymity level until the relevant code has been run on the intended dataset and its output has been checked.
+
+8. Technical Review
+
+Sushant should review this section for consistency with the project’s implemented generalization, masking, quasi-identifier selection, and suppression logic. Update the explanation if the code behaves differently from the illustrative examples above.
+
+Suggested repository path: report/k_anonymity_section.txt
+Suggested commit message: docs: add k-anonymity report section
