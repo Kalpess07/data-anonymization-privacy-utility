@@ -1,0 +1,38 @@
+DAY 9: BEFORE/AFTER ANONYMIZATION TABLE TEMPLATE
+Project: Empirical Research Investigation on Data Anonymization Techniques: Evaluating the Privacy-Utility Trade-off in ML Models
+
+Purpose
+Use this template to document how selected values change after a specific anonymization technique. Populate it only with verified examples from the dataset and the actual transformation output.
+
+1. Before/After Table
+
+| Record ID or row reference | Column | Original value | Anonymized value | Technique used | Anonymization level | Notes |
+|---|---|---|---|---|---|---|
+| Example row reference | age | 37 | 30-39 | Age generalization | Level 1 | Illustrative example; replace with a verified row/output |
+| Example row reference | zip_code | 93810 | 93*** | ZIP-like value masking | Level 1 | Illustrative example; verify exact transformation rule |
+
+Important: The two example rows above are illustrative only. Confirm the actual code's behavior and use a real row reference from the input/output data before treating them as experimental evidence. Do not include direct identifiers or sensitive raw records in a public report unnecessarily.
+
+2. Suggested Summary Table
+
+| Column | Technique | Rule used | Example before | Example after | Verified against output? |
+|---|---|---|---|---|---|
+| age | Generalization | Confirm configured bin width | Pending | Pending | No |
+| zip_code | Masking/generalization | Confirm number of retained digits | Pending | Pending | No |
+
+3. Completion Checklist
+- [ ] Confirm which anonymization notebook or function produced the transformed data.
+- [ ] Confirm the exact rules used for each field.
+- [ ] Select a small, non-sensitive sample from the input and transformed outputs.
+- [ ] Verify each before/after pair against the actual output.
+- [ ] Ask Sushant and Dhiraj to review the transformation names and rules.
+- [ ] Save the completed table in the report or results folder as agreed by the team.
+
+4. Notes for Review
+- Masking and generalization are different techniques; describe the actual transformation rather than using the terms interchangeably.
+- A masked value alone does not prove that a dataset satisfies k-anonymity.
+- Keep the table consistent with the code and experiment level used.
+- Do not claim that the template was shared with teammates unless that sharing actually occurred.
+
+Suggested GitHub filename: report/day9_before_after_table_template.md
+Suggested commit message: docs: add before-after anonymization table template
