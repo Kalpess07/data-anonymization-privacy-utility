@@ -1,0 +1,78 @@
+DAY 16: REUSABLE PLOTTING FUNCTION
+
+Project: An Empirical Research Investigation on Data Anonymization Techniques: Evaluating the Privacy-Utility Trade-off in ML Models
+
+Deliverable
+- plotting_utils.py: reusable plotting functions.
+- This guide explains how to use the functions.
+
+1. What the supplied CSV contains
+
+The uploaded comparison CSV has these columns:
+model, experiment, baseline_accuracy, level1_accuracy, change_accuracy, baseline_precision, level1_precision, change_precision, baseline_recall, level1_recall, change_recall, baseline_f1_score, level1_f1_score, change_f1_score
+
+It contains a baseline-versus-Level 1 comparison. It does not include separate anonymization-level rows for Medium/High or a k column, so accuracy-by-level and accuracy-by-k plots require a future results CSV with the required columns.
+
+2. Functions included
+
+- plot_baseline_vs_level1(csv_path, output_path=None)
+  Reads the current wide-format comparison CSV and plots baseline versus Level 1 accuracy for each model.
+
+- plot_accuracy_by_level(csv_path, output_path=None)
+  Requires columns: model, anonymization_level, accuracy.
+
+- plot_accuracy_by_k(csv_path, output_path=None)
+  Requires columns: model, k, accuracy.
+
+The functions check for required columns and raise a clear error when the CSV does not contain them. They do not invent missing levels or k values.
+
+3. Example usage
+
+```python
+from plotting_utils import plot_baseline_vs_level1
+
+plot_baseline_vs_level1(
+    "results/baseline_vs_level1_comparison.csv",
+    "figures/accuracy_baseline_vs_level1.png"
+)
+```
+
+When the results are stored in long format by anonymization level:
+
+```python
+from plotting_utils import plot_accuracy_by_level
+
+plot_accuracy_by_level(
+    "results/accuracy_by_level.csv",
+    "figures/accuracy_by_level.png"
+)
+```
+
+When results include measured k values:
+
+```python
+from plotting_utils import plot_accuracy_by_k
+
+plot_accuracy_by_k(
+    "results/accuracy_by_k.csv",
+    "figures/accuracy_vs_k.png"
+)
+```
+
+4. How to use in a notebook
+
+1. Save plotting_utils.py in the repository's src/ folder.
+2. From a notebook at notebooks/, import it with:
+   `from src.plotting_utils import plot_baseline_vs_level1`
+   If the repository root is not on Python's import path, adjust the notebook path setup or run from the repository root.
+3. Use the appropriate function for the columns in your CSV.
+4. Check the generated chart and save it under figures/.
+5. Record the source CSV and experiment settings alongside the chart.
+
+5. Testing status
+
+The function signatures and expected columns were designed around the uploaded CSV's actual column names. The module has not been executed here against a full project environment, so do not claim it has been fully tested until you run the notebook or script in the repository environment.
+
+Suggested repository path: src/plotting_utils.py
+Suggested documentation path: report/day16_plotting_function_usage.txt
+Suggested commit message: feat: add reusable plotting functions
