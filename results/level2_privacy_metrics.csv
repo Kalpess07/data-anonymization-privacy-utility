@@ -1,4 +1,0 @@
-level,input_rows,output_rows_before_suppression,minimum_k_before_suppression,target_k,suppressed_records,suppression_fraction,output_rows_after_suppression,minimum_k_after_suppression
-low,32561,32561,1,,0,0.0,32561,1
-medium,32561,32561,1,3.0,1,3.071158748195694e-05,32560,3
-high,32561,32561,6,5.0,0,0.0,32561,6
