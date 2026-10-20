@@ -1,14 +1,14 @@
 """Configuration-driven anonymization pipeline."""
 from __future__ import annotations
 import pandas as pd
-from .anonymization import generalize_age, mask_zip, remove_columns
-from .k_anonymity import measure_k_anonymity, suppress_records_below_k
+from anonymization import generalize_age, mask_zip, remove_columns
+from k_anonymity import measure_k_anonymity, suppress_records_below_k
 
 # Proposed defaults only. Confirm these rules and the quasi-identifiers with the team.
 LEVEL_CONFIG = {
     "low": {"age_bin_width": 10, "zip_keep_digits": 2, "target_k": None, "remove_columns": []},
-    "medium": {"age_bin_width": 10, "zip_keep_digits": 1, "target_k": 3, "remove_columns": []},
-    "high": {"age_bin_width": 20, "zip_keep_digits": 1, "target_k": 5, "remove_columns": []},
+    "medium": {"age_bin_width": 20, "zip_keep_digits": 1, "target_k": 3, "remove_columns": []},
+    "high": {"age_bin_width": 30, "zip_keep_digits": 1, "target_k": 5, "remove_columns": []},
 }
 
 

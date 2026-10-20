@@ -1,0 +1,6 @@
+dataset,rows,unique_qi_combinations,singleton_combinations,rows_in_singleton_combinations,minimum_class_size
+Original,32561,32442,32325,32325,1
+Low,32561,717,65,65,1
+Medium,32561,45,0,0,6
+High,32561,45,0,0,6
+Level 1,32561,5647,922,922,1

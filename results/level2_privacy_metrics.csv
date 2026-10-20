@@ -1,0 +1,4 @@
+level,input_rows,rows_before_suppression,rows_after_generalization,target_k,minimum_k_before_suppression,suppressed_rows,suppression_fraction,output_rows,minimum_k_after_suppression,age_bin_width,zip_keep_digits
+low,32561,32561,32561,,1,0,0.0,32561,1,10,2
+medium,32561,32561,32561,3.0,6,0,0.0,32561,6,20,1
+high,32561,32561,32561,5.0,6,0,0.0,32561,6,20,1
